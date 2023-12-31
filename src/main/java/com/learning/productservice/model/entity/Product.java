@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PRODUCT", schema = "dm_management", catalog = "postgres")
+@Table(name = "PRODUCT", catalog = "postgres")
 public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -19,7 +19,7 @@ public class Product {
     @Column(name = "PRODUCT_PRICE", nullable = false)
     private BigDecimal productPrice;
 
-    @Column(name = "PRODUCT_QUANTITY")
+    @Column(name = "PRODUCT_QUANTITY", nullable = false)
     private Long productQuantity;
 
     public Product() {
