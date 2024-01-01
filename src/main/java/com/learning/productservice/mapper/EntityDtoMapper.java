@@ -4,16 +4,19 @@ import com.learning.productservice.model.entity.Product;
 import com.learning.productservice.model.request.ProductRequest;
 import com.learning.productservice.model.response.ProductResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring")
 public interface EntityDtoMapper {
 
-    ProductResponse productEntityToDto(Product employer);
+    ProductResponse productEntityToDto(Product product);
 
-    Product productDtoToEntity(ProductRequest employerRequest);
+    List<ProductResponse> productEntityListToDtoList(Page<Product> productList);
+
+    Product productDtoToEntity(ProductRequest productRequest);
 
     /**
      * MapStruct will automatically use the map method when converting Optional<Long> to Long.

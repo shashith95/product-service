@@ -8,6 +8,9 @@ import com.learning.productservice.repository.ProductRepository;
 import com.learning.productservice.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,5 +37,11 @@ public class ProductServiceImpl implements ProductService {
         logger.info("Product saved successfully with ID: {}", savedProduct.getProductId());
 
         return savedProduct;
+    }
+
+    public Page<Product> getAllProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return productRepository.findAll(pageable);
     }
 }

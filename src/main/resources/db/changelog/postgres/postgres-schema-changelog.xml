@@ -4,23 +4,23 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd"
                    objectQuotingStrategy="QUOTE_ALL_OBJECTS">
 
-    <changeSet id="1704010107630-1" author="shashith">
+    <changeSet id="1704010107630-1" author="shashith.aravinda">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="product"/>
+                <tableExists tableName="PRODUCT"/>
             </not>
         </preConditions>
-        <createTable tableName="product">
-            <column autoIncrement="true" name="product_id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
+        <createTable tableName="PRODUCT">
+            <column autoIncrement="true" name="PRODUCT_ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PRODUCT_ID"/>
             </column>
-            <column name="product_name" type="VARCHAR(255)">
+            <column name="PRODUCT_NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="product_price" type="DECIMAL">
+            <column name="PRODUCT_PRICE" type="DECIMAL">
                 <constraints nullable="false"/>
             </column>
-            <column name="product_quantity" type="BIGINT">
+            <column name="PRODUCT_QUANTITY" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>

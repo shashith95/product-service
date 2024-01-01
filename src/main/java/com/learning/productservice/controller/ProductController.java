@@ -8,6 +8,7 @@ import com.learning.productservice.service.ProductService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +30,21 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<ApiResponse> getProductById(@RequestParam Long productId) {
-        logger.info("Get employer by ID: {} API triggered", productId);
-        Product employer = productService.getProductById(productId);
+        logger.info("Get product by ID: {} API triggered", productId);
+        Product product = productService.getProductById(productId);
 
-        return generateResponse(HttpStatus.OK, "Employer Returned Successfully", "100",
-                entityDtoMapper.productEntityToDto(employer));
+        return generateResponse(HttpStatus.OK, "Product Returned Successfully", "100",
+                entityDtoMapper.productEntityToDto(product));
+    }
+
+    @GetMapping("all-products")
+    public ResponseEntity<ApiResponse> getAllProducts(@RequestParam(defaultValue = "0") Integer page,
+                                                      @RequestParam(defaultValue = "1000") Integer resultSize) {
+        logger.info("Get all products API triggered");
+        Page<Product> productList = productService.getAllProducts(page, resultSize);
+
+        return generateResponse(HttpStatus.OK, "Products Returned Successfully", "100",
+                entityDtoMapper.productEntityListToDtoList(productList));
     }
 
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.POST})
@@ -42,7 +53,7 @@ public class ProductController {
         Product product = productService.saveOrUpdateProduct(productRequest);
 
         return generateResponse(productRequest.productId().isEmpty() ? HttpStatus.CREATED : HttpStatus.OK,
-                "Employer " + (productRequest.productId().isEmpty() ? "Created" : "Updated") + " Successfully",
+                "Product " + (productRequest.productId().isEmpty() ? "Created" : "Updated") + " Successfully",
                 "100",
                 entityDtoMapper.productEntityToDto(product));
     }
