@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.learning</groupId>
     <artifactId>order-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>product-service</name>
 	<description>Spring Boot Product Service</description>
 	<properties>
