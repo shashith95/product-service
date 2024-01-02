@@ -1,6 +1,7 @@
 package com.learning.productservice.service.impl;
 
 import com.learning.productservice.exception.DataNotFoundException;
+import com.learning.productservice.exception.GeneralException;
 import com.learning.productservice.mapper.EntityDtoMapper;
 import com.learning.productservice.model.entity.Product;
 import com.learning.productservice.model.request.ProductRequest;
@@ -43,5 +44,17 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(page, size);
 
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public void updateProductQuantity(Long productId, Long quantity) throws GeneralException {
+        Product product = getProductById(productId);
+
+        if (product.getProductQuantity() < quantity) {
+            throw new GeneralException("Product does not have sufficient quantity", "INSUFFICIENT_QUANTITY");
+        }
+
+        product.setProductQuantity(product.getProductQuantity() - quantity);
+        productRepository.save(product);
     }
 }

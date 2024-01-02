@@ -26,6 +26,19 @@ public class ResponseHandler {
                         new ArrayList<>()));
     }
 
+    public static ResponseEntity<ApiResponse> generateResponse(HttpStatus httpStatus,
+                                                               String responseMessage,
+                                                               String responseCode) {
+
+        return ResponseEntity
+                .status(httpStatus)
+                .body(new ApiResponse(
+                        responseMessage,
+                        responseCode,
+                        null,
+                        new ArrayList<>()));
+    }
+
     public static ResponseEntity<ApiResponse> generateErrorResponse(HttpStatus httpStatus,
                                                                     String responseMessage,
                                                                     String responseCode,

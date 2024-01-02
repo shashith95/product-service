@@ -28,10 +28,5 @@ spring:
   banner:
     location: productServiceBanner.txt
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8080/eureka}
-
 server:
   port: 8081

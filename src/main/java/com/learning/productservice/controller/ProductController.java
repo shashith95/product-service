@@ -1,11 +1,13 @@
 package com.learning.productservice.controller;
 
+import com.learning.productservice.exception.GeneralException;
 import com.learning.productservice.mapper.EntityDtoMapper;
 import com.learning.productservice.model.common.ApiResponse;
 import com.learning.productservice.model.entity.Product;
 import com.learning.productservice.model.request.ProductRequest;
 import com.learning.productservice.service.ProductService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -49,12 +51,23 @@ public class ProductController {
 
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.POST})
     public ResponseEntity<ApiResponse> saveOrUpdateProduct(@Valid @RequestBody ProductRequest productRequest) {
-        logger.info("Save or Update employer API triggered with request body: {}", productRequest);
+        logger.info("Save or Update product API triggered with request body: {}", productRequest);
         Product product = productService.saveOrUpdateProduct(productRequest);
 
         return generateResponse(productRequest.productId().isEmpty() ? HttpStatus.CREATED : HttpStatus.OK,
                 "Product " + (productRequest.productId().isEmpty() ? "Created" : "Updated") + " Successfully",
                 "100",
                 entityDtoMapper.productEntityToDto(product));
+    }
+
+    @PutMapping("update-quantity")
+    public ResponseEntity<ApiResponse> updateProductQuantity(@Valid @RequestParam @NotNull Long productId,
+                                                             @RequestParam @NotNull Long quantity) throws GeneralException {
+        logger.info("Update product quantity API triggered productId: {} and quantity: {}", productId, quantity);
+        productService.updateProductQuantity(productId, quantity);
+
+        return generateResponse(HttpStatus.NO_CONTENT,
+                "Product Updated Successfully",
+                "100");
     }
 }
