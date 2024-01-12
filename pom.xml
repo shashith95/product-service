@@ -8,7 +8,7 @@
 		<version>0.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-    <artifactId>order-service</artifactId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.1</version>
 	<name>product-service</name>
 	<description>Spring Boot Product Service</description>
@@ -18,6 +18,11 @@
 	</properties>
 	<dependencies>
 		<!--        All common dependencies are inherited from base-service -->
+		<dependency>
+			<groupId>com.learning</groupId>
+			<artifactId>common-data-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
