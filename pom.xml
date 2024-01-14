@@ -19,6 +19,15 @@
 	<dependencies>
 		<!--        All common dependencies are inherited from base-service -->
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.okta.spring</groupId>
+            <artifactId>okta-spring-boot-starter</artifactId>
+            <version>3.0.6</version>
+        </dependency>
+        <dependency>
 			<groupId>com.learning</groupId>
 			<artifactId>common-data-service</artifactId>
 			<version>${project.version}</version>
